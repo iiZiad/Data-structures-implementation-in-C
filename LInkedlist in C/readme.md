@@ -1,2 +1,2 @@
 #### How to build
-##### ` gcc main.c linked.c -lm -o app `
+##### `gcc main.c linked.c -lm -o app`
