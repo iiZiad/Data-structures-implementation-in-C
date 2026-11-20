@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "linked.h"
+#include <time.h>
+#include <math.h>
 
 void create(Head *l){
     l->head = NULL;
@@ -42,4 +44,37 @@ dataType retrieve(Head *l, int pos){
     returned = temp->item;
     free(temp);
     return returned;
+}
+int searchItem(Head l, dataType item, int *i , clock_t *atime){
+    Node *temp = l.head;
+    *atime = clock();
+    while( temp != NULL ){
+        for(int j = 0 ; j < 1000 ; j++){
+            float a = log(j*j*j*j);
+        } // for taking some time to test
+        if(temp->item == item){
+            *atime = clock() - *atime;
+            return 1;
+        }else{
+            temp = temp->next;
+        }
+        (*i)++;
+    }
+    return 0;
+}
+void isPresent(Head *l, dataType item){
+    clock_t timespent[2];
+    int pos = 0;
+    if(searchItem(*l,item, &pos, &timespent[0]) == 1){
+        insert(l, retrieve(l, pos), 0);
+        pos = 0;
+        searchItem(*l,item, &pos, &timespent[1]);
+        printf("Item is exist in pos %d and the list is optimized\n", pos);
+        float n1 = (float) timespent[0] / CLOCKS_PER_SEC;
+        float n2 = (float) timespent[1] / CLOCKS_PER_SEC;
+        printf("Before : %f sec\nAfter : %f sec\nimprovement : %.2f %%\n", n1, n2, (n1/n2) * 100);
+    }else{
+        printf("Item is not exist\n");
+    }
+
 }

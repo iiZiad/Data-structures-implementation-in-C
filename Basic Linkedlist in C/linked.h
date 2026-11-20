@@ -15,6 +15,7 @@ int isEmpty(Head);
 int isFull(Head);
 void insert(Head *, dataType, int);
 dataType retrieve(Head *, int);
+void isPresent(Head *, dataType);
 
 
 #endif
